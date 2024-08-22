@@ -26,3 +26,13 @@ class Room(models.Model):
 
     def __str__(self):
         return f'{self.room_type} - {self.hotel.name}'
+
+class Booking(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    check_in = models.DateField()
+    check_out = models.DateField()
+    guests = models.IntegerField()
+
+    def __str__(self):
+        return f'Booking by {self.user.username} for {self.room.hotel.name} ({self.room.room_type})'
